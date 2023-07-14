@@ -12,9 +12,10 @@ export class ReservationsRepository {
     this.logger = new Logger(ReservationsRepository.name);
   }
 
-  async create(params: CreateReservationDto): Promise<Reservation> {
+  async create(params: CreateReservationDto, userId: number): Promise<Reservation> {
     return this.databaseService.reservation.create({
       data: {
+        userId,
         startDate: new Date(params.startDate),
         endDate: new Date(params.endDate),
       },

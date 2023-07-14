@@ -12,8 +12,6 @@ export class AuthService {
   ) {}
 
   async login(user: any, response: Response) {
-    console.log(user);
-
     const payload: ITokenPayload = {
       userId: user.uuid,
     };

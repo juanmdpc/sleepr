@@ -11,8 +11,8 @@ export class ReservationsService {
     this.logger = new Logger(ReservationsService.name);
   }
 
-  async create(params: CreateReservationDto) {
-    return this.reservationsRepository.create(params);
+  async create(params: CreateReservationDto, userId: number) {
+    return this.reservationsRepository.create(params, userId);
   }
 
   async findAll() {
