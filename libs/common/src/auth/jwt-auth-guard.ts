@@ -6,7 +6,7 @@ import {
   Inject,
   Injectable,
 } from '@nestjs/common';
-import { Observable, map, tap } from 'rxjs';
+import { Observable, catchError, map, of, tap } from 'rxjs';
 
 @Injectable()
 export class JwtAuthGuard implements CanActivate {
@@ -30,6 +30,7 @@ export class JwtAuthGuard implements CanActivate {
           context.switchToHttp().getRequest().user = res;
         }),
         map(() => true),
+        catchError(() => of(false))
       );
   }
 }
