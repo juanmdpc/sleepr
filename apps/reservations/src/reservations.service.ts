@@ -14,8 +14,8 @@ export class ReservationsService {
     this.logger = new Logger(ReservationsService.name);
   }
 
-  async create(params: CreateReservationDto, userId: number) {
-    return this.paymentsService.send('create_charge', params.charge).pipe(map(() => {
+  async create(params: CreateReservationDto, {id: userId, email}) {
+    return this.paymentsService.send('create_charge', {...params.charge, email}).pipe(map(() => {
       return this.reservationsRepository.create(params, userId)
     }))
   }
