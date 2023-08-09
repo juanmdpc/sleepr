@@ -4,7 +4,6 @@ WORKDIR /usr/src/app
 
 COPY package.json ./
 COPY package-lock.json ./
-COPY prisma ./prisma/
 
 RUN npm install
 
@@ -21,13 +20,11 @@ WORKDIR /usr/src/app
 
 COPY package.json ./
 COPY package-lock.json ./
-COPY prisma ./prisma/
 
 RUN npm install --production
 
 COPY --from=development /usr/src/app/dist ./dist
 COPY --from=builder /usr/src/app/node_modules ./node_modules
 COPY --from=builder /usr/src/app/package*.json ./
-COPY --from=development usr/src/app/prisma ./prisma
 
-CMD [ "npx", "prisma", "migrate", "deploy", "&&", "node", "dist/apps/payments/main"]
+CMD ["node", "dist/apps/payments/main"]
